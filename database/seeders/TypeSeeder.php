@@ -25,6 +25,8 @@ class TypeSeeder extends Seeder
 
             $type->label = $label;
 
+            $type->color = $faker->hexColor();
+
             $type->save();
         }
         
