@@ -4,30 +4,47 @@
 
     <section>
 
-        
-
         <div class="container">
 
-            <h1>{{$project->id}}: {{$project->title}} {!! $project->type->getLabel() !!}</h1>
-
-            <h2 class="mt-4">Description:</h2>
             <div>
-                {{$project->content}}
+                <h1>{{$project->id}}: {{$project->title}}</h1>
             </div>
 
-             {{-- FUNCTION TO SHOW TECHS TEXT LABELS--}}
-            {{ $project->getTechsText()}}
+            <div class="mt-3">
+                <h5>Project Type:</h5>
 
-
-            <a href="{{ route('admin.projects.index') }}">
-                <div class="btn btn-primary my-4">
-                    <- Back to the index
+                <div>
+                    {{-- FUNCTION TO SHOW TYPE LABELS--}}
+                    {!! $project->type->getLabel() !!}
                 </div>
-            </a>
+            </div>
+
+            <div class="mt-3">
+                <h5 class="display-inline">Technologies:</h5>
+
+                <div>
+                    {{-- FUNCTION TO SHOW TECHS TEXT LABELS--}}
+                    {{ $project->getTechsText()}}
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <h3 >Description:</h3>
+                
+                <div>
+                    {{$project->content}}
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <a href="{{ route('admin.projects.index') }}">
+                    <div class="btn btn-primary my-4">
+                        <- index
+                    </div>
+                </a>
+            </div>
         </div>
 
     </section>
-
-
 
 @endsection
