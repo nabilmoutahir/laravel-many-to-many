@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 // use \Http\Requests\UpdatePostRequest;
 
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 
 use Illuminate\Http\Request;
@@ -36,9 +37,13 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $project = new Project;
+
+        $technologies = Technology::all();
+
         $types = Type::all();
 
-        return view('admin.projects.create', compact('types'));
+        return view('admin.projects.create', compact('types', 'technologies', 'project'));
     }
 
     /**
@@ -49,13 +54,19 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->validated();
+
         $data = $request->all();
 
+        dd($data);
+
+        // NEW PROJECT
         $project = new Project;
 
         // FILL DATA
         $project->fill($data);
 
+        // SAVE PROJECT
         $project->save();
 
         return redirect()->route('projects.show', $project);
