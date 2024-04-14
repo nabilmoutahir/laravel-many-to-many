@@ -4,9 +4,16 @@ namespace App\Http\Controllers\Admin;
 // utile
 use App\Http\Controllers\Controller;
 
-use App\Models\Type;
+// use\Http\Requests\StorePostRequest;
+// use \Http\Requests\UpdatePostRequest;
+
 use App\Models\Project;
+use App\Models\Type;
+
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -96,8 +103,12 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        $project->delete();
+        // AUTH CONDITION
+        if (Auth::id() != $project->user_id && Auth::user()->role != 'admin')
+            abort(403);
 
+
+        $project->delete();
         return redirect()->route('admin.projects.index');
     }
 }
