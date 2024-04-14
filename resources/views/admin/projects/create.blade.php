@@ -10,7 +10,6 @@
 
     <div class="col-6">
 
-
       <div class="col-12">
         <label for="type_id" class="form-label">Type</label>
         <select name="type_id" id="type_id" class="form-select @error('type_id') is-invalid @enderror">
@@ -47,6 +46,18 @@
       <div class="col-3 pt-3">
           <button class="btn btn-primary">Save!</button>
       </div>
+    </div>
+
+    <div class="col-6">
+      <label class="form-label">Technologies</label>
+      @foreach ($technologies as $tech)
+      <div class="col-12">
+        
+        <input class="form-check-input" id="technologies-{{ $tech->id }}" value="{{ $tech->id }}" name="technologies[]" type="checkbox">
+        <label class="form-check-label" for="technologies-{{ $tech->id }}">{{ $tech->label }}</label>
+        
+      </div>
+      @endforeach
     </div>
   </form>
 
