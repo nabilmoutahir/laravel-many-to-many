@@ -8,12 +8,16 @@
 
         <div class="container">
 
-            <h1>{{$project->id}}: {{$project->title}} <span class="badge text-bg-secondary">{{$project->type->label ?? ''}}</span></h1>
+            <h1>{{$project->id}}: {{$project->title}} {!! $project->type->getLabel() !!}</h1>
 
             <h2 class="mt-4">Description:</h2>
             <div>
                 {{$project->content}}
             </div>
+
+             {{-- FUNCTION TO SHOW TECHS TEXT LABELS--}}
+            {{ $project->getTechsText()}}
+
 
             <a href="{{ route('admin.projects.index') }}">
                 <div class="btn btn-primary my-4">
