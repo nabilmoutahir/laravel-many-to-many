@@ -11,9 +11,9 @@
                     <tr>
                         <th>ID</th>
                         <th>Title</th>
-                        <th>Slug</th>
-                        <th>Content</th>
+                        <th>Technologies</th>
                         <th>Type</th>
+                        <th>Slug</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,9 +21,10 @@
                         <tr>
                             <td>{{ $project->id }}</td>
                             <td>{{ $project->title}}</td>
+                            <td>{{$project->getTechsText()}}</td>
+                            <td>{!! $project->type?->getLabel() !!}</td>
                             <td>{{ $project->slug}}</td>
-                            <td>{{ $project->content}}</td>
-                            <td>{{ $project->type->label ?? '' }}</td>
+                            
                             <td>
                                 <a href="{{ route('admin.projects.show', $project) }}">Details</a>
                             </td>
