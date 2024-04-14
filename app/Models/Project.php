@@ -22,4 +22,10 @@ class Project extends Model
     {
         return $this->belongsToMany(Technology::class);
     }
+
+    // FUNCTION TO GET TECHS LABELS
+    public function getTechsText(){
+
+        return implode(' - ', $this->technologies->pluck('label')->toArray());
+    }
 }
