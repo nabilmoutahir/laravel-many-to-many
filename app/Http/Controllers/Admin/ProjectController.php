@@ -14,6 +14,7 @@ use App\Models\Type;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -58,6 +59,8 @@ class ProjectController extends Controller
 
         $data = $request->all();
 
+        
+
         // NEW PROJECT
         $project = new Project;
 
@@ -67,6 +70,14 @@ class ProjectController extends Controller
         // FILL SLUG
         $project->slug = Str::slug($project->title);
 
+        if (Arr::exists($data, 'image')){
+        // STORE IMAGE
+        $image_path = Storage::put('uploads/projects', $data['image']);
+
+        // ADD IMAGE
+        $project->image = $image_path;
+        }
+        
         // SAVE PROJECT
         $project->save();
 
@@ -92,7 +103,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        $technologies = Technology::all();
+
+        $types = Type::all();
+
+        return view('admin.projects.edit', compact('types', 'project', 'technologies'));
     }
 
     /**
@@ -117,6 +132,20 @@ class ProjectController extends Controller
 
         // SAVE
         $project->save();
+
+        // IMAGE
+        if (Arr::exists($data, 'image')){
+
+            if(!empty($project->image)){
+                Storage::delete($project->image);
+            }
+
+            // STORE IMAGE
+            $image_path = Storage::put('uploads/projects', $data['image']);
+
+            // ADD IMAGE
+            $project->image = $image_path;
+        }
 
         return redirect()->route('admin.projects.show', $project);
     }
