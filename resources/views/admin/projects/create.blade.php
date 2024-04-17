@@ -27,22 +27,20 @@
         @enderror
       </div>
 
+      {{-- TITLE --}}
       <div class="col-12">
           <label class="form-label" for="title">Title</label>
           <input class="form-control" type="text" name="title" id="title">
       </div>
 
-      <div class="col-12">
-          <label class="form-label" for="slug">SLug</label>
-          <input class="form-control" type="text" name="slug" id="slug">
-      </div>
-
+      {{-- CONTENT --}}
       <div class="col-12">
           <label for="content">Content</label>
           <textarea class="form-control" rows="12" type="text" name="content" id="content">
           </textarea>
       </div>
 
+      {{-- SAVE --}}
       <div class="col-3 pt-3">
           <button class="btn btn-primary">Save!</button>
       </div>
