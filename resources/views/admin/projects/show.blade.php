@@ -15,7 +15,7 @@
 
                 <div>
                     {{-- FUNCTION TO SHOW TYPE LABELS--}}
-                    {!! $project->type->getLabel() !!}
+                    {{$project->type->label ?? ''}}
                 </div>
             </div>
 

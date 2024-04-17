@@ -6,7 +6,7 @@
         <div class="container">
             <h1>Projects</h1>
 
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -27,6 +27,10 @@
                             
                             <td>
                                 <a href="{{ route('admin.projects.show', $project) }}">Details</a>
+                            </td>
+
+                            <td>
+                                <a href="{{ route('admin.projects.edit', $project) }}">Update</a>
                             </td>
 
                             <td>
