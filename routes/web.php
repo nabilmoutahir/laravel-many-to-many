@@ -35,13 +35,19 @@ Route::middleware('auth')
     Route::resource('projects', ProjectController::class);
 
     // CREATE
-    Route::get('/comics/create', [ProjectController::class, 'create'])->name('admin.projects.create');
+    Route::get('admin/projects/create', [ProjectController::class, 'create'])->name('admin.projects.create');
 
     // SHOW
     Route::get('admin/projects/create', [ProjectController::class, 'show'])->name('admin.projects.show');
 
     // STORE
     Route::post('admin/projects', [ProjectController::class, 'store'])->name('admin.projects.store');
+    
+    // EDIT
+    Route::post('admin/projects/{project}/edit', [ProjectController::class, 'edit'])->name('admin.projects.edit');
+
+    // UPDATE
+    Route::patch('admin/projects/{project}', [ProjectController::class, 'update'])->name('admin.projects.update');
 
     // DESTROY
     Route::delete('admin/projects/{project}', [ProjectController::class, 'destroy'])->name('project.destroy');
