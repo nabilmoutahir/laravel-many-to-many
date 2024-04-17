@@ -14,7 +14,7 @@ use App\Models\Type;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-// use Illuminate\Support\Str;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -25,7 +25,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(20);
+        $projects = Project::orderBy('id', 'DESC')->paginate(20);
 
         return view('admin.projects.index', compact('projects'));
     }
@@ -58,18 +58,19 @@ class ProjectController extends Controller
 
         $data = $request->all();
 
-        dd($data);
-
         // NEW PROJECT
         $project = new Project;
 
         // FILL DATA
         $project->fill($data);
 
+        // FILL SLUG
+        $project->slug = Str::slug($project->title);
+
         // SAVE PROJECT
         $project->save();
 
-        return redirect()->route('projects.show', $project);
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
@@ -91,7 +92,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('projects.edit', compact('project'));
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -103,7 +104,21 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        return redirect()->route('projects.show', $project);
+
+        // validation
+
+        $data = $request->all();
+
+        // FILL DATA
+        $project->fill($data);
+
+        // FILL SLUG
+        $project->slug = Str::slug($project->title);
+
+        // SAVE
+        $project->save();
+
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
@@ -115,11 +130,12 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         // AUTH CONDITION
-        if (Auth::id() != $project->user_id && Auth::user()->role != 'admin')
-            abort(403);
+        // if (Auth::id() != $project->user_id && Auth::user()->role != 'admin')
+        //     abort(403);
 
 
         $project->delete();
+
         return redirect()->route('admin.projects.index');
     }
 }
