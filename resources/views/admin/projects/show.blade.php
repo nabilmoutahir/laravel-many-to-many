@@ -36,6 +36,13 @@
                 </div>
             </div>
 
+            {{-- IMAGE --}}
+            @if (!@empty($project->image))
+                
+                <img src="{{ asset('storage/' . $project->image)}}" alt="">
+                
+            @endif
+
             <div class="mt-3">
                 <a href="{{ route('admin.projects.index') }}">
                     <div class="btn btn-primary my-4">

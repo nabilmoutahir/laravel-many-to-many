@@ -12,7 +12,7 @@
 
     <div class="col-6">
 
-      {{-- <div class="col-12">
+      <div class="col-12">
         <label for="type_id" class="form-label">Type</label>
         <select name="type_id" id="type_id" class="form-select @error('type_id') is-invalid @enderror">
         <option value="">Non categorizzato</option>
@@ -24,10 +24,10 @@
         </select>
         @error('type_id')
           <div class="invalid-feedback">
-            MEX
+            error
           </div>
         @enderror
-      </div> --}}
+      </div>
 
       {{-- TITLE --}}
       <div class="col-12">
@@ -49,7 +49,7 @@
       </div>
     </div>
 
-    {{-- <div class="col-6">
+    <div class="col-6">
       <label class="form-label">Technologies</label>
       @foreach ($technologies as $tech)
       <div class="col-12">
@@ -59,7 +59,7 @@
         
       </div>
       @endforeach
-    </div> --}}
+    </div>
   </form>
 
 

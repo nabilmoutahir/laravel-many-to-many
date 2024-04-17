@@ -5,7 +5,7 @@
 <div class="container">
 
 
-  <form action="{{ route('admin.projects.store')}}" method="POST" class="row d-flex">
+  <form enctype="multipart/form-data" action="{{ route('admin.projects.store')}}" method="POST" class="row d-flex">
     @csrf
 
     <div class="col-6">
@@ -31,6 +31,13 @@
       <div class="col-12">
           <label class="form-label" for="title">Title</label>
           <input class="form-control" type="text" name="title" id="title">
+      </div>
+
+      {{-- FILE --}}
+      <div class="col-12">
+          <label class="form-label" for="image">File</label>
+          <input class="form-control" type="file" name="image" id="image">
+          </input>
       </div>
 
       {{-- CONTENT --}}
